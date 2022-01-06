@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<TITLE>JS string</TITLE>
+</head>
+<body>
+<h1>String</h1>
+<script>
+//도우미 함수들
+function TITLE(t){ document.write("<hr><h3>" + t + "</h3>");}
+function write(c){ document.write(c + "<br>"); }  // 도우미 함수
+function wrType(dsc, c) {document.write(dsc + " : " + c + " " + typeof c + "<br>");}
+</script>
+
+<script>
+/* 기본적으로 string 의 모든 함수는 immutable 하다. 즉 원본을 변화시키기 않고, 
+ * 새로운 string 을 만들어 리턴한다.
+ */
+var str, str1, str2;
+TITLE("문자열 생성");
+// 문자열은 
+//   1. "~" 혹은 '~' 으로 정의 
+//   2. new String() 으로 정의 (비추)
+str = "Volvo";
+str = 'Volvo';
+
+// '~', "~" 둘다 사용하는 이유
+str = "It's alright";  write(str);
+str = 'He is called "Johnny"'; write(str);
+
+// new 사용하여 생성하는 경우
+// TODO
+
+// .length
+TITLE("length: 문자개수");
+var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+write(str.length);
+
+// 이스케이프 문자 escape character
+//  \'   \"   \\    \n   \t       
+TITLE("Escapce character");
+str = "He is called\"Johnny\"";
+write(str);
+
+// 문자열 중간에 자르기
+TITLE("문자열 중간에 자르기")
+str = "Hello Web Application";  // 과연 문자열을 중간에 자르면 될까
+write(str);
+str = "Hello Web Appli\
+cation";
+write(str);   // 그러나, 위 방법은 비추.
+
+str = "Hello Web Appli" + 
+"cation";
+write(str);  
+
+
+
+// indexOf(), lastIndexOf(), search() : 문자열 안에서 문자열 찾기
+// 찾은 위치 인덱스 리턴, 못찾으면 -1 리턴
+TITLE("문자열 검색 <br>indexOf(), lastIndexOf(), search()");
+str = "Please locate where 'locate' occurs!";
+write(str.indexOf("locate")); // 7
+write(str.lastIndexOf("locate")); // 21
+write(str.indexOf("John")); // -1
+write(str.indexOf("locate", 15));   // 15번째부터 검색
+write(str.lastIndexOf("locate", 15));   // 15번째부터 역방향 검색
+
+
+// search() : 문자열 안에서 문자열 찾기
+write(str.search("locate"));
+
+// search() vs indexOf() : 둘은 다르다!
+// 	search() : 두번째 매개변수 없다, regexp 사용 가능
+// 	indexOf() : regexp 사용 불가
+
+
+//문자열 추출
+//slice(start, end) : start 부터 'end직전'까지 문자열 추출
+//substring(start, end)
+//substr(start, length) : start 부터 length 개의 문자 추출
+TITLE("문자열 추출<br>slice(), substring(), substr()");
+str = "Apple, Banana, Kiwi";
+
+write(str.slice(7, 13));  // 7번째부터 13번째 전까지. [7, 13)
+write(str);  // 원본은 변화되지 않는다!! (immutable!!)
+write(str.slice(-12, -6))  // 음수 인덱싱 가능!!
+write(str.slice(7));   // 7부터 끝까지.
+write(str.slice(-12)); 
+
+write(str.substring(7, 13));  // slice() 와 유사하나 음수인덱싱 지원안함..
+write(str.substring(7));
+
+write(str.substr(7, 6));   // 7부터 6글자 추출
+write(str.substr(7));      // 7부터 끝까지
+write(str.substr(-4));     // 음수인덱싱 지원
+
+
+// 문자열 치환
+// replace() : 치환한 결과 문자열 리턴, 정규표현식 사용 가능
+// 기본적으로 첫번째 '매칭된 문자열 만 치환
+TITLE("문자열 치환 replace()");
+str = "Please visit Japan!";
+write(str.replace("Japan", "Korea"));
+write(str);
+write(str.replace("JAPAN", "Korea"));  // 대소문자 구분.
+write(str.replace(/JAPAN/i, "Korea")); // 정규표현식 사용하여 대소문자 구분없이 치환
+// i : case Insensitive 약자.
+
+str = "Please visit Japan! Go Japan";
+write(str.replace("Japan", "Korea"));  // 기본적으로 첫번째 매칭만 치환
+write(str.replace(/Japan/g, "Korea"));  // 정규표현식, global match (모든 매칭을 치환)
+
+
+
+// 대소문자 전환
+// toUpperCase(), toLowerCase()
+TITLE("대소문자 전환<br>toUpperCase(), toLowerCase()");
+str = "Hello World!";
+write(str.toUpperCase());
+write(str.toLowerCase());
+
+// 문자열 연결 concat()
+TITLE("문자열 연결 concat()");
+str1 = "Hello";
+str2 = "World";
+
+// 아래 두 문장은 같다
+write(str1 + str2);
+write(str1.concat(str2));
+
+write(str1 + " " + str2);
+write(str1.concat(" ", str2));  // 여러개의 매개변수로 문자열 연결 가능
+write("a".concat("b", "c", "d"));
+
+
+// 좌우 공백 제거 trim()
+TITLE("좌우 공백 제거 trim()");
+str = "       Hello World!        ";
+//※ alert() 으로 확인해볼수 밖에 없다.
+// alert("[" + str + "]");
+// alert("[" + str.trim() + "]");
+
+
+// 문자 코드 : 
+// charAt(position)
+// charCodeAt(position)
+// Property access [ ]
+TITLE("문자 코드 <br> [ ], charAt(), charCodeAt()");
+str = "HELLO WORLD";
+write(str.charAt(0));
+write(str.charAt(100));  // 범위 벗어나면 아무것도 안나옴, 음수인덱싱 없슴
+
+write(str.charCodeAt(0));  // 72
+
+write(str[0]);   // H
+write(str[100]);  // undefined
+
+
+// 다음과 같이 해도 변화없다 . 왜? string 은 immutable 이니까!!
+str[0] = 'Y';
+write(str);
+
+// string -> array : split()
+// array -> string : join()
+TITLE("string ↔ array");
+str = "2019-11-23"; 
+var arr = str.split("-");   // "-" 을 기준으로 문자열 분리 -> array 로 리턴
+write(arr);
+write(arr.length);
+write(arr[0]);
+
+str = "Hello";
+write(str.split("")); // H,e,l,l,o
+
+str = "Hello My World";
+write(str.split(" "));
+
+str = "Hello My  World";
+write(str.split(" "));  // Hello,My,,World
+write(str.split(/\s+/)); // Hello,My,World  split() 은 regexp 사용 가능
+
+arr = ["H", "e", "l", "l", "o"];  // array -> string
+write(arr.join("_"));
+
+arr = ["08", "22", "37"];
+write(arr.join(":"));
+
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

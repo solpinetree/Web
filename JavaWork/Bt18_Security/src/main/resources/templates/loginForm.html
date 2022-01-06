@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>로그인 페이지</title>
+<style>
+.error {color:red}
+</style>
+</head>
+<body>
+<h1>로그인 페이지</h1>
+<hr>
+<!-- loginProcessingUrl() 로 세팅한 url, 반드시 POST! -->
+<form action="/loginOk" method="POST">  <!-- 시큐리티로 /loginOk 을 낚아챈다.  무조건 POST -->
+    <!-- ↓ 아이디/패스워드 의 name 은 'username' 과 'password' 로 하자 (시큐리티의 디폴트) -->
+    <input type="text" name="username" placeholder="아이디 입력" th:value="${username}"/><br>
+    <input type="password" name="password" placeholder="패스워드 입력"/><br>
+    <br>
+    <span class="error" th:text="${errorMessage}"></span><br>
+    <input type="submit" value="로그인"/>
+</form>
+<br>
+<a href="/join">회원가입을 아직 하지 않으셨나요?</a>
+</body>
+</html>

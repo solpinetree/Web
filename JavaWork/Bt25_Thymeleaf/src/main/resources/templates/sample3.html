@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf3</title>
+<style>
+table, th, td{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+table{
+	width:100%;
+}
+</style>
+</head>
+<body>
+	
+<!-- 	<div th: text="list[0]"></div>		list[0] 걍 문자열 ...
+	<div th: text="${list[0]}"></div>		list[0] 걍 문자열 ... -->
+	
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>REGDATE</td>
+			<td>format</td>
+		</tr>
+		
+ 		<tr th:each="member : ${list}">
+			<td th:text="${member.id}">ID</td>
+			<td th:text="${member.name}">NAME</td>
+			<td th:text="${member.regdate}">REGDATE</td>
+			<td th:text="${#temporals.format(member.regdate, 'yyyy-MM-dd HH:mm:ss')}">REGDATE</td>
+		</tr>
+	</table>
+	
+	<hr>
+	
+	<table>
+        <tr>
+            <td>INDEX</td>
+            <td>SIZE</td>
+            <td>ODD/EVEN</td>
+            <td>ID</td>
+            <td>NAME</td>
+            <td>REGDATE</td>
+        </tr>
+        
+        <tr th:each="member, iterState : ${list}">
+        	<td th:text="${iterState.index}"></td>
+        	<td th:text="${iterState.size}"></td>
+        	<td th:text="${iterState.odd+ ' ' + iterState.even}"></td>
+        	<td th:text="${member.name}"></td>
+        	<td th:text="${#temporals.format(member.regdate, 'yyyy-MM-dd HH:mm:ss')}">REGDATE</td>
+        </tr>
+        
+    </table>
+
+	<hr>
+	
+	<ol>
+		<li th:each="item : ${arr}">[[${item}]]</li>
+	</ol> 
+</body>
+</html>

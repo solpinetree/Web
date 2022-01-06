@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.domain.WriteDAO">
+
+	<select id="selectByUid"
+		resultType="com.lec.spring.domain.WriteDTO">
+		SELECT 
+			cp_uid,
+			cp_name,
+			cp_kind,
+			cp_sno
+		FROM exam_coupon 
+		WHERE cp_uid = #{cp_uid}
+	</select>
+
+	<update id="update" flushCache="true"
+		parameterType="com.lec.spring.domain.WriteDTO">
+		UPDATE exam_coupon
+		SET cp_name = #{cp_name}, cp_kind = #{cp_kind}, cp_sno=#{cp_sno}
+		WHERE cp_uid = #{cp_uid}
+	</update>
+	
+	<delete id="deleteByUid" flushCache="true">
+		DELETE FROM exam_coupon WHERE cp_uid = #{cp_uid}	
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

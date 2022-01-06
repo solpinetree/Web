@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf3</title>
+</head>
+<body>
+	<div>
+		Context Path: <b>[[${#request.getContextPath()}]]</b>
+	</div>
+
+
+	<ol>
+		<h3>Absolute URLs @{http:// ... }</h3>
+		<li><a th:href="@{https://www.naver.com}">sample1</a></li>
+		<li><a th:href="@{http://localhost:8080/thymeleaf/sample1}">sample1</a></li>
+		<li><a
+			th:href="@{'http://localhost:8080'+'/thymeleaf'+'/sample1'}">sample1</a></li>
+		<li><a
+			th:href="@{'http://localhost:8080'+${#request.getContextPath()} +'/sample1'}">sample1</a></li>
+
+		<h3>Context-relative URLs @{/ ... }</h3>
+		<li><a th:href="@{/sample1}">sample1</a></li>
+		<li><a th:href="@{/sample2}">sample1</a></li>
+
+		<h3>Server-relative URLs @{~/ ... }</h3>
+		<li><a th:href="@{~/sample1}">sample1</a></li>
+		<li><a th:href="@{~/thymeleaf/sample1}">sample1</a></li>
+
+		<h3>Parameter</h3>
+		<li><a th:href="@{/sample1?p1=aaa&p2=bbb}">sample1?p1=aaa&p2=bbb</a></li>
+		<li><a th:href="@{/sample1(p1='aaa',p2='bbb')}">sample1?p1=aaa&p2=bbb</a></li>
+
+		<h3>
+			th:<i>attr</i>
+		</h3>
+		<input type="text" th:value="${value1}">
+		<br>
+		<button th:onclick="'location.href=\''+@{${url1}}+ '\''">sample1</button>
+		<br>
+		<button onclick="">sample1</button>
+		<br>
+
+
+
+
+	</ol>
+
+
+
+	<hr>
+	<h3>th:block</h3>
+	<!--  Thymeleaf 에는 전역변수가 없드아.  -->
+	<div th:with="name='John'">
+		<div>
+			name: [[${name}]]
+			<ol>
+				<li th:text="${name}"></li>
+				<li th:text="${name}"></li>
+				<li th:text="${name}"></li>
+			</ol>
+		</div>
+	</div>
+
+	<div>name: [[${name}]]</div>
+	<hr>
+
+	<!-- th:block 에서 선언. 그 하위에서 사용 가능. th:block 은 response 되지 않는다 -->
+	<th:block th:with="name='John'">
+	<div>
+		<div>
+			name: [[${name}]]
+			<ol>
+				<li th:text="${name}"></li>
+				<li th:text="${name}"></li>
+				<li th:text="${name}"></li>
+			</ol>
+		</div>
+	</div>
+
+	<div>name: [[${name}]]</div>
+	</th:block>
+
+
+</body>
+</html>

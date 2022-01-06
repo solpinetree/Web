@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.domain.WriteDAO">
+
+	<select id="select" resultType="com.lec.spring.domain.WriteDTO">
+		SELECT 
+			cp_uid,
+			cp_name,
+			cp_kind,
+			cp_sno
+		FROM 
+			exam_coupon 
+		ORDER BY 
+			cp_uid DESC	
+	</select>
+	
+	<insert id="insert" flushCache="true"
+		parameterType="com.lec.spring.domain.WriteDTO"
+		keyColumn="cp_uid" useGeneratedKeys="true" keyProperty="cp_uid">
+		INSERT INTO exam_coupon
+			(cp_name, cp_kind, cp_sno)
+		VALUES
+			(#{cp_name}, #{cp_kind}, #{cp_sno})
+	</insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

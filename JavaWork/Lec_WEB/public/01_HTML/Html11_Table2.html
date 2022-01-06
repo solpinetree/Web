@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Table2</title>
+<style>
+table, th, td {
+    border: 1px solid black;  /* 두께, 선종류, 선색상 */
+    border-collapse: collapse; /* border 붙이기 */
+}
+
+th, td {
+	padding: 15px;	/* 셀 안쪽의 컨텐트와 border 사이 여백 */
+}
+
+th {
+	text-align: left;
+}
+</style>
+
+</head>
+<!--
+colspan : 열병합
+rowspan : 행병합 
+ -->
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th colspan="2">Contact</th>
+            <th>etc</th>
+        </tr>
+        <tr>
+            <td>홍길동</td>
+            <td>3333-444</td>
+            <td>7777-1717</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th colspan="2">Contact</th>
+            <th>etc</th>
+        </tr>
+        <tr>
+            <td rowspan="2">하하</td>
+            <td>3333-444</td>
+            <td>7777-1717</td>
+            <td>냠냠</td>
+        </tr>
+        <tr>
+            <!-- <td>허허</td> -->
+            <td colspan="2";rowspan="2" >3333-444</td>
+            <!-- <td>7777-1717</td> -->
+            <td>냠냠</td>
+        </tr>
+        <tr>
+            <td>블랙 피그</td>
+            <!-- <td>3333-444</td> -->
+            <!-- <td>7777-1717</td> -->
+            <td>냠냠</td>
+        </tr>
+    </table>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

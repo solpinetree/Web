@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf3</title>
+</head>
+<body>
+	<h4 th:text="${vo}"></h4>	<!--  ${}객체, 변수 표현 -->
+	<h4 th:text="vo"></h4>
+
+	<div th:text="${'aaaa'}"></div>
+	<div th:text="${aaaa}"></div>	<!-- 에러는 아니다, 없는객체/변수는 표현안함 -->
+	<div th:text="${'aaaa' + 10+ 'bbbb'}"></div>
+	<!-- <div th:text="${aaaa + bbbb}"></div> -->	<!--  에러, 없는 객체/변수끼리 연산 불가 -->
+	
+	
+	<!-- escaping 하기  What's up? 출력 -->
+	<h3>escaping 하기</h3>
+	<div th:text="${'What''s up?'}"></div>
+	<div th:text="'What\'s up?'"></div>
+
+</body>
+</html>

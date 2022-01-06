@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript DataTypes</title>
+</head>
+<!-- 
+	JS의 자료형(data type) : https://www.w3schools.com/js/js_datatypes.asp
+	
+	number
+	string
+	boolean
+	array
+	object
+	function
+	undefined
+	
+	JS의 자료형(타입) 은 가변적(dynamic) 하다.
+	
+ -->
+ 
+<body>
+<hr>
+<script>
+var x;  // 최초 선언만 한 상태는 undefined
+document.write(x + " : " + typeof x + "<br>");
+
+// JS는 값을 대입할때 변수의 타입이 정해진다.
+x = 10;  // 변수 x 선언하고 숫자 10 을 대입, x 는 number 타입
+document.write(x + " : " + typeof x + "<br>");
+
+// JS. 변수 타입이 가변적
+x = "Hello javascript";   // x 는 string 타입
+document.write(x + " : " + typeof x + "<br>");
+
+</script>
+
+
+<script>
+// 도우미 함수들
+function TITLE(t){ document.write("<hr><h2>" + t + "</h2>");}
+function write(c){ document.write(c + "<br>"); }  // 도우미 함수
+function wrType(dsc, c) {document.write(dsc + c + " [" + typeof c + "]<br>");}
+</script>
+
+<script>
+document.write("<h1>JavaScript 의 데이터타입</h1>");
+TITLE("var, undefined");
+
+var x = undefined;              // Now x is undefined
+wrType("x = ", x);
+//아예 선언안된 변수 사용하면 에러다 (에러 라인 이후 진행안됨.)
+//document.write("y = " + y + "  [" + (typeof y) + "]<br>");
+
+y = 10;  // var 없이도 선언 가능 
+wrType("y = ", y);
+
+delete y;  // var 없이 선언한 변수 삭제 가능
+//wrType("y = ", y);
+
+//───────────────────────────────────────────────────────────────────────
+// ※ JavaScript 는 문장구분기호 ; 가 필수는 아니다.
+TITLE("number, string 타입")
+wrType("x = ", x)
+
+x = 5;           	// Now x is a Number
+wrType("x = ", x)
+
+x = "John";      // Now x is a String
+wrType("x = ", x)
+
+x = 16 + 4 + "Volvo";
+wrType("x = ", x)
+
+x = "Volvo" + 16 + 4;
+wrType("x = ", x)
+
+x = undefined;
+wrType("x = ", x)
+
+x = "10" + 10;		// "1010(string)" 이건 문자열 연결 연산을 하는데..
+wrType("x = ", x)
+
+x = "10" * 10;		// 100(number) 헐... 이건 왜 number 형변환 되는건데..
+wrType("x = ", x)
+
+x = "10" - 2
+wrType("x = ", x)
+
+x = "10" / 2
+wrType("x = ", x)
+
+x = "10" > 2   // true (비교연산자에서도 형변환이 된다!)
+wrType("x = ", x)  
+
+
+// NaN : Not a Number
+x = "a" * 10; // 에러는 아니다. 다음 라인 실행된다
+wrType("x = ", x)
+
+// Infinity 
+x = 10 / 0;  // 에러는 아니다. 다음 라인 실행된다
+wrType("x = ", x);
+
+// null
+x = null;  // null [object]
+wrType("x = ", x);
+
+// ★ 웹 화면에  undefined, NaN, null, Infinity 가 출력되고 있다면
+// 무언가 잘못 페이지가 만들어졌다는 뜻이다.
+
+//───────────────────────────────────────────────────────────────────────
+TITLE("boolean 타입");
+x = ( 10 > 5 ); wrType("x = ", x)
+
+x = (10 == "10"); // == 연산자는 '값' 만 비교
+wrType("x = ", x);
+x = (10 === "10"); // === 연산자는 '값' 뿐 아니라 '타입' 도 비교
+wrType("x = ", x);
+
+// 마찬가지로 !=, !== 연산자도 있다
+	
+// 조건식에서의 참/거짓 판정  (Truthy / Falsy)
+
+// 당연히 boolean 값은 그대로..
+x = (true)?true:false;   
+document.write("true → " + x + "<br>");
+
+// number 타입 판정 : 0 은 거짓, 0 이외의 숫자는 참 판정
+x = (10)?true:false;   
+document.write("10 → " + x + "<br>");
+
+x = (0)?true:false;   // false
+document.write("0 → " + x + "<br>");
+
+// string 타입 판정 : 비어있는 문자열은 거짓, 나머지는 참 판정 
+x = ('0')?true:false;   // true
+document.write("'0' → " + x + "<br>");
+x = ('')?true:false;   // false
+document.write("'' → " + x + "<br>");
+x = (' ')?true:false;   // true
+document.write("' ' → " + x + "<br>");
+x = ('hello')?true:false;
+document.write("'hello' → " + x + "<br>");
+
+// 없는 변수값은??
+//x = (bbb)?true:false;   // 에러 발생,  console 에서 확인해보자
+//document.write("bbb → " + x + "<br>");
+
+x = ([])?true:false;  // 비어있는 array 는 true
+document.write("[] → " + x + "<br>");
+x = ({})?true:false;  // 비어있는 object 는 true
+document.write("{} → " + x + "<br>");
+
+
+x = (null)?true:false;
+document.write("null → " + x + "<br>");
+x = (undefined)?true:false;
+document.write("undefined → " + x + "<br>");
+x = (NaN)?true:false;
+document.write("NaN → " + x + "<br>");
+x = (Infinity)?true:false;   // <-- 요건 true 다.
+document.write("Infinity → " + x + "<br>");
+
+
+//───────────────────────────────────────────────────────────────────────
+TITLE("array 타입");
+x = [10, 20, 30];
+wrType("x = ", x);  // typeof 배열의 결과는 object
+wrType("x[0] = ", x[0]);
+wrType("x[3] = ", x[3]);
+document.write("x.length = " + x.length + "<br>");
+
+// 자바 스크립트의 배열원소는 어떠한 타입도 가능
+x = ['Car', 10, 3.14, true];
+wrType("x = ", x);
+
+document.write("<br>");
+for(i = 0; i < x.length; i++){
+	wrType("x[" + i + "] = ", x[i]);
+}
+
+// for~in 문으로 추출 가능
+// 단 아래의 i 는 '배열원소' 값이 아니라 '배열 인덱스' 다
+document.write("<br>");
+for(i in x){
+	wrType("x[" + i + "] = ", x[i]);
+}
+
+document.write("<br>");
+x = ['Kim', 171.3,
+		[93, 74, 100, 74]
+	];
+wrType("x = ", x);
+wrType("x.length = ", x.length);
+wrType("x[2] = ", x[2]);
+wrType("x[2].length = ", x[2].length);
+wrType("x[2][1] = ", x[2][1]);
+
+//───────────────────────────────────────────────────────────────────────
+TITLE("function 타입");
+function a(arg){
+	return arg;
+}
+wrType("a = ", a);
+
+x = a;  // 함수가 변수에 대입되다?  함수 이름이 곧 데이터다!?!?
+		
+wrType("x = ", x);
+wrType("a(30) = ", a(30));
+wrType("x(55) = ", x(55));  // 호출가능!
+
+
+// JavaScript 는 아래와 같이 함수 정의도 가능하다!!!
+x = function(arg){
+	return arg * 2;
+}
+wrType("x = ", x);
+wrType("x(100) = ", x(100));
+
+//───────────────────────────────────────────────────────────────────────
+TITLE("object 타입");
+x = {firstName:"John", lastName:"Doe"};    // Object
+
+wrType("x = ", x);
+wrType("x.firstName = ", x.firstName);
+wrType("x['firstName'] = ", x['firstName']);
+wrType("x.lastName = ", x.lastName);
+wrType("x['lastName'] = ", x['lastName']);
+
+
+document.write("<br>");
+// for~in 문으로 추출 가능
+for(k in x){   // 프로퍼티 이름이 추출됨 (string)
+	wrType("x['" + k + "'] = ", x[k]);
+}
+
+// 없는 프로퍼티는 
+wrType("x.address = ", x.address);
+
+document.write("<br>");
+// 오브젝트의 타입도 얼마든지 각각 개별적
+// ● 프로퍼티를 하나하나 추가해가면서 확인해보자.
+x = {
+	name: "kim",
+	age: 34,
+	height: 172.3,
+	score: [94, 35, 79],
+	getScore: function(n){
+		return this.score[n];  // 동일 object 의 property 접근하려면 this 명시 꼭!
+	},
+	getTotal: function(){
+		var sum = 0;
+		for(i = 0; i < this.score.length; i++){
+			sum += this.score[i];
+		}
+		return sum;
+	},
+	getAvg : function(){
+			return this.getTotal() / this.score.length;
+	}
+};
+wrType("x = ", x);
+wrType("x.name = ", x.name);
+wrType("x.age = ", x.age);
+wrType("x.score[2] = ", x.score[2]);
+wrType("x.getScore = ", x.getScore);
+wrType("x.getScore(2) = ", x.getScore(2));
+wrType("x.getTotal() = ", x.getTotal());
+wrType("x.getAvg() = ", x.getAvg());
+
+//───────────────────────────────────────────────────────────────────────
+TITLE("array 타입 (2)");
+x = [
+	"Kim", 34, 172.3,
+	{kor: 94, eng: 35, math: 79},
+	[
+		{
+			address: "서울",
+			year: 1998
+		},
+		{
+			address: "제주",
+			year: 2012
+		}
+	],
+	function(){  // x[5]
+		var sum = 0;
+		for(k in this[3]){
+			sum += this[3][k];  // this[3].k
+		}
+		return sum;
+	}
+];
+
+wrType("x = ", x);
+wrType("x.length = ", x.length);
+wrType("x[3].kor = ", x[3].kor);
+// x : array
+// x[3] : object
+// x[3].kor : number
+
+// TODO
+wrType("x[4][0].address = ", x[4][0].address);
+wrType("x[4][1].year = ", x[4][1].year);
+wrType("x[5]() = ", x[5]());
+
+</script>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

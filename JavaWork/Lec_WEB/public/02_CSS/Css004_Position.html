@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Position</title>
+
+<style>
+div.static {
+	border: 3px solid limegreen;
+	position: static;
+}
+
+div.relative {
+	border: 3px solid orangered;
+	width: 400px;
+	position: relative;
+	left:30px;     /* 원래위치부터 왼쪽에서부터 ->(양수라면), left: -30px 도 가능 */
+	/* right: 30px;	 left와 right를 동시에 쓸 수는 없음, 오른쪽에서부터 <- */
+	/* top: 30px;	위에서부터 */ 
+	/* bottom: 30px;	 top과 bottom도 동시에 쓸 수 x */
+}
+
+div.fixed {
+	border: 3px solid blue;
+	width: 300px;
+	position: fixed;
+	bottom: 0px; /* 뷰포트에 대해 상대적 배치, 뷰포트 아래쪽에서 0px 위로*/
+	right: 0px;
+}
+
+div.absolute {
+	border: 3px solid orchid;
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	top:40px;
+}
+</style>
+
+</head>
+
+
+<body>
+<h2>position: static</h2>
+<div class="static">static</div>
+
+<br><hr>
+
+<h2>position: relative</h2>
+<div class="relative">relative</div>
+
+<br><hr>
+
+<h2>position: fixed</h2>
+<div class="fixed">fixed</div>
+
+<br><hr>
+
+<h2>position: absolute</h2> <!-- 다음 2개 비교 -->
+<!--  부모가 relative, fixed, absolute 인 경우 -->
+<!-- TODO -->
+<div class="relative">부모1-relative
+	<div class="absolute">absolute1</div>
+</div>
+
+<br>
+<!-- 부모가 static 인 경우 -->
+<!-- TODO -->
+<div class="static">부모2-static
+	<div class="absolute">absolute2</div>
+</div>
+
+<br><hr>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

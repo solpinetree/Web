@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Width & Height</title>
+<style>
+.c1 {background-color: powderblue;}
+.c2 {background-color: lightpink;}
+.c3 {background-color: yellow;}
+
+div#demo11 { 
+	height: 200px;
+	width: 50%;   /* 사용할 수 있는 폭의 50%만 사용 */
+ }
+
+div#demo12 { 
+	height: 100px;
+ }
+
+div#demo21 { 
+	height: 150px;
+	max-width: 500px;
+ }
+
+div#demo22 { 
+	height: 150px;
+	min-width: 500px;
+}
+
+div#demo31 { 
+	max-height: 70px;
+	/* overflow: hidden;  넘친 컨텐츠는 짤림 */
+	overflow: auto;   /* 넘친 컨텐츠에 대해 스크롤바가 생김 */
+ }
+
+div#demo32 { 
+	min-height: 70px;
+	
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>width & height</h2>
+
+<p>아래 div element 는 height 200px / width  50%:</p>
+<div class="c1" id="demo11">demo11</div>
+
+<p>아래 div element 는 height 100px:</p>
+<div class="c1" id="demo12">demo12</div>
+
+<hr><br>
+
+
+<h2>max-width & min-width</h2>
+<p>아래 div element 는 height 150px / max-width 500px </p>
+<div class="c2" id="demo21">demo21</div>
+
+<p>아래 div element 는 height 150px / min-width 500px </p>
+<div class="c2" id="demo22">
+demo22<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed eros volutpat, accumsan nisl cursus, facilisis est. Sed quis nunc ut eros ornare auctor sed non lacus. Donec eu neque ut sapien venenatis venenatis sed vel quam. Nulla ut metus et ipsum posuere egestas. Maecenas ac hendrerit risus. Sed ultrices est id nisi congue ultrices. Vestibulum eget velit sed arcu ornare auctor.</div>
+
+<hr><br>
+
+
+<h2>max-height & min-height</h2>
+
+<p>아래 div element 는 기본값 </p>
+<div class="c3">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed eros volutpat, accumsan nisl cursus, facilisis est. Sed quis nunc ut eros ornare auctor sed non lacus. Donec eu neque ut sapien venenatis venenatis sed vel quam. Nulla ut metus et ipsum posuere egestas. Maecenas ac hendrerit risus. Sed ultrices est id nisi congue ultrices. Vestibulum eget velit sed arcu ornare auctor.</div>
+
+<p>아래 div element 는 max-height: 70px </p>
+<div class="c3" id="demo31">
+demo31<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed eros volutpat, accumsan nisl cursus, facilisis est. Sed quis nunc ut eros ornare auctor sed non lacus. Donec eu neque ut sapien venenatis venenatis sed vel quam. Nulla ut metus et ipsum posuere egestas. Maecenas ac hendrerit risus. Sed ultrices est id nisi congue ultrices. Vestibulum eget velit sed arcu ornare auctor.</div>
+
+<p>아래 div element 는 min-height: 70px </p>
+<div class="c3" id="demo32">
+demo32
+</div>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.domain.WriteDAO">
+
+	<select id="selectByUid" 
+		resultType="com.lec.spring.domain.WriteDTO">
+		SELECT 
+			wr_uid uid, wr_subject subject, wr_content content, wr_name name, 
+			wr_viewcnt viewcnt, wr_regdate regDate 
+		FROM test_write
+		WHERE wr_uid = #{uid} 
+	</select>
+	
+	<update id="incViewCnt" flushCache="true">
+		UPDATE test_write
+		SET wr_viewcnt = wr_viewcnt + 1
+		WHERE wr_uid = #{param1} 
+	</update>
+	
+	<update id="update" flushCache="true" 
+		parameterType="com.lec.spring.domain.WriteDTO">
+		UPDATE test_write
+		SET wr_subject = #{subject}, wr_content = #{content}
+		WHERE wr_uid = #{uid}
+	</update>
+	
+	<delete id="deleteByUid" flushCache="true">
+		DELETE FROM test_write WHERE wr_uid = #{uid}
+	</delete>
+</mapper>
+
+

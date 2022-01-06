@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>로그인</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://use.fontawesome.com/926fe18a63.js"></script>
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+</head>
+<body bgcolor='#DFCFBE'>
+
+
+    <div class="main-container">
+        <div class="main-wrap">
+        <header>
+            <div class="sel-lang-wrap">
+                <select class="lang-select">
+                    <option>한국어</option>
+                    <option>English</option>
+                </select>
+            </div>
+            <div id="header">
+                <p class="logo">BookLog</a>
+            </div>
+        </header>
+        <section class="login-input-section-wrap">
+            <div class="login-input-wrap">	
+                <input placeholder="Username" type="text"></input>
+            </div>
+            <div class="login-input-wrap password-wrap">	
+                <input placeholder="Password" type="password"></input>
+            </div>
+            <div class="login-button-wrap">
+                <button>Sign in</button>
+            </div>
+            <div class="login-stay-sign-in">
+                <i class="far fa-check-circle"></i>
+                <span>Stay Signed in</span>
+            </div>
+        </section>
+        <section class="Easy-sgin-in-wrap">
+            <!-- <h2>다른 방법으로 로그인하기</h2> -->
+            <ul class="sign-button-list">
+                <div id="naverIdLogin"></div>
+                <a id="kakao-login-btn"></a>
+            </ul>
+            <br><br>
+            <p class="forget-msg">Forgot your Username or Password? | Sign up</p>
+        </section>
+        </div>
+    </div>
+
+
+   <!-- <a href="http://developers.kakao.com/logout">Logout</a> -->
+   <script type='text/javascript'>
+    // Javascript api key
+    Kakao.init('65c9f79c00dce40eedc3bd3082999eae');
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function (authObj) {
+            alert(JSON.stringify(authObj));
+        },
+        fail: function (err) {
+            alert(JSON.stringify(err));
+        }
+    }); 
+    </script>
+
+
+    <!-- 네이버아디디로로그인 초기화 Script -->
+    <script type="text/javascript">
+        var naverLogin = new naver.LoginWithNaverId(
+            {
+                clientId: "u8YqgoSGNh2V7yhEIltG",
+                callbackUrl: "https://127.0.0.1:5500/index.html",
+                isPopup: false, /* 팝업을 통한 연동처리 여부 */
+                loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+            }
+        );
+        
+        /* 설정정보를 초기화하고 연동을 준비 */
+        naverLogin.init();
+        
+    </script>
+
+</body>
+</html>

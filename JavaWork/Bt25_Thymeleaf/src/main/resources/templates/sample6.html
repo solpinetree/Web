@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf3</title>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<!-- table 요소 안에서만 사용가능한 지역변수 target 선언 및 초기화-->
+	<table th:inline="text">
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>REGDATE</td>
+		</tr>
+
+		<tr th:each="member : ${list}">
+			<td>[[${member.id}]]</td>
+			<td>[[${member.name}]]</td>
+			<td>[[${member.regdate}]]</td>
+		</tr>
+	</table>
+
+	<h3 th:if="${list} and ${#lists.size(list)} > 0">[[${#lists.size(list)}]]개</h3>
+
+</body>
+</html>

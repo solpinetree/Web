@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영수증 확인 폼</title>
+
+    <style>
+        #reciept {
+            width: 700px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        table {
+            width: 700px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #aaaaaa;
+            border-collapse: collapse;
+        }
+
+        tr {
+            height: 40px;
+        }
+
+        th {
+            width: 180px;
+            text-align: left;
+            padding: 8px;
+            background-color: rgb(198, 214, 235);
+        }
+
+        td#recieptOption {
+            text-align: center;
+        }
+
+        .longText {
+            width: 300px;
+            height: 20px;
+            margin: 5px 10px;
+        }
+
+        .shortText {
+            width: 60px;
+            height: 30px;
+            margin: 5px 20px;
+        }
+
+        #btn {
+            font-size: 16px;
+            width: 80px;
+            height: 35px;
+            color: white;
+            background-color: rgb(54, 104, 168);
+            display: block;
+            margin: auto;
+        }
+
+        /* 처음 시작은 구매자명과 결제금액만 보이게 */
+        .noneDisplay {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="reciept">
+        <h3>영수증 확인을 위해 아래의 정보를 정확히 입력해 주시기 바랍니다.</h3>
+        <br>
+        <table id="outter_table">
+            <tr>
+                <td id="recieptOption">
+                    <input type="radio" name="option" value="구매자명+금액" onclick="doDisplay(this)" checked>구매자명 + 금액
+                    <input type="radio" name="option" value="이메일" onclick="doDisplay(this)">이메일
+                    <input type="radio" name="option" value="카드번호" onclick="doDisplay(this)">카드번호
+                </td>
+            </tr>
+            <form name="frm1" action="https://www.w3schools.com/action_page.php" method="get">
+                <table class="inner_table">
+                    <tr>
+                        <th>구매자명</th>
+                        <td><input type="text" class="longText" name="name" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>결제금액</th>
+                        <td><input type="number" class="longText" name="price" value=""></td>
+                    </tr>
+                </table>
+            </form>
+            <form name="frm2" action="https://www.w3schools.com/action_page.php" method="get">
+                <table class="inner_table noneDisplay" name="table">
+                    <tr>
+                        <th>이메일</th>
+                        <td><input type="text" class="longText noneDisabled" name="email" value=""></td>
+                    </tr>
+                </table>
+            </form>
+            <form name="frm3" action="https://www.w3schools.com/action_page.php" method="get">
+                <table class="inner_table noneDisplay" name="table">
+                    <tr>
+                        <th>카드번호</th>
+                        <td>
+                            <input type="number" class="shortText noneDisabled" name="cardNum1" value="">-
+                            <input type="number" class="shortText noneDisabled" name="cardNum2" value="">-
+                            <input type="number" class="shortText noneDisabled" name="cardNum3" value="">-
+                            <input type="number" class="shortText noneDisabled" name="cardNum4" value="">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </table>
+
+        <br><br>
+        <input type="submit" id="btn" value="제출" onclick="chkSubmit()">
+
+        <p><br>[참고사항]<br>구매자명과 금액은 결제결과 안내 메일에 기재된 내역 기준으로 입력하시기 바랍니다.</p>
+
+        <script>
+            // radio 클릭시
+            function doDisplay(ele) {
+                var radios = document.getElementsByName('option');          // radio 객체 배열로 받기
+                var table = document.getElementsByClassName('inner_table'); // 테이블객체 배열로 받기
+
+                for (i = 0; i < radios.length; i++) {
+                    if (radios[i].value == ele.value) {     // 이벤트를 발생시킨 객체의 value와 i번째 radio의 value 값이 같다면
+                        table[i].style.display = "table";   // 테이블 보이기
+                    } else {                                // 아니라면
+                        table[i].style.display = "none";    // 테이블 숨기기
+                    }
+                }
+            }
+
+            // 제출할 때 폼 검증
+            function chkSubmit() {
+                var op = document.getElementsByName('option'); // radio 객체 배열로 받기
+
+                if (op[0].checked) { // 구매자명 + 금액을 check한 상태면
+                    var form = document.forms['frm1'];
+                    var name_txt = form.name.value.trim();
+                    var price_txt = form.price.value.trim();
+
+                    // 구매자명 유효성 검사
+                    if (name_txt == "") {
+                        alert("구매자명을 입력하세요.");
+                        form.name.focus();
+
+                        return;
+                    }
+                    // 결제금액 유효성 검사
+                    if (price_txt == "" || price_txt < 0) {
+                        alert("결제금액을 입력하세요.");
+                        form.price.focus();
+
+                        return;
+                    }
+
+                    // 구매자명 + 금액 submit
+                    form.submit();
+
+                } else if (op[1].checked) { // 이메일을 check한 상태면
+                    var form = document.forms['frm2'];
+                    var email = form.email.value.trim();
+
+                    var emailPat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;  // email 패턴에 대한 정규표현식
+                    // 이메일 유효성 검사
+                    if (!emailPat.test(email)) {
+                        alert("이메일을 정확하게 입력하세요.");
+                        form.email.focus();
+
+                        return;
+                    }
+
+                    // 이메일 submit
+                    form.submit();
+
+                } else if (op[2].checked) { // 카드번호를 check한 상태면
+                    var form = document.forms['frm3'];
+                    var cardNum1 = form.cardNum1.value.trim();
+                    var cardNum2 = form.cardNum2.value.trim();
+                    var cardNum3 = form.cardNum3.value.trim();
+                    var cardNum4 = form.cardNum4.value.trim();
+
+                    var numPat = /\d{4}/;
+                    // 카드번호 유효성 검사
+                    if (!numPat.test(cardNum1)) {
+                        alert("카드번호를 입력하세요.");
+                        form.cardNum1.focus();
+
+                        return;
+                    }
+                    if (!numPat.test(cardNum2)) {
+                        alert("카드번호를 입력하세요.");
+                        form.cardNum2.focus();
+
+                        return;
+                    }
+                    if (!numPat.test(cardNum3)) {
+                        alert("카드번호를 입력하세요.");
+                        form.cardNum3.focus();
+
+                        return;
+                    }
+                    if (!numPat.test(cardNum4)) {
+                        alert("카드번호를 입력하세요.");
+                        form.cardNum4.focus();
+
+                        return;
+                    }
+
+                    // 카드번호 submit
+                    form.submit();
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

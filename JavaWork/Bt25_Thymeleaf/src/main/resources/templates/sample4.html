@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf3</title>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<!-- table 요소 안에서만 사용가능한 지역변수 target 선언 및 초기화-->
+	<table th:with="target='u0001'">
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>REGDATE</td>
+			<td>format</td>
+		</tr>
+
+		<tr th:each="member : ${list}">
+			<td th:text="${member.id == target ? 'SECRET' : member.id}">ID</td>
+			<td th:text="${member.name}">NAME</td>
+			<td th:text="${member.regdate}">REGDATE</td>
+			<td
+				th:text="${#temporals.format(member.regdate, 'yyyy-MM-dd HH:mm:ss')}">REGDATE</td>
+		</tr>
+	</table>
+
+	<div th:text="${target}"></div>
+	<hr>
+
+	<table th:with="target='u0001'">
+		<tr>
+			<td>ID</td>
+			<td>NAME</td>
+			<td>REGDATE</td>
+			<td>format</td>
+		</tr>
+
+		<tr th:each="member : ${list}">
+			<td th:if-"${member.id}">	<!--  member.id가 null이 아니면 -->
+				<a th:if="${member.id == target}" href="/modify">MODIFY</a>
+				<p th:unless="${member.id == target}">VIEW</p>
+			</td>
+			<td th:text="${member.name}">NAME</td>
+			<td th:text="${#temporals.format(member.regdate, 'yyyy-MM-dd HH:mm:ss')}">REGDATE</td>
+		</tr>
+	</table>
+
+	<hr>
+	<h5 th:if="${test1}">1 [[${test1}]]</h5>
+	<h5 th:if="${test2}">2 [[${test2}]]</h5>	<!--  "" empty 문자열 참 판정 -->
+	<h5 th:if="${test3}">3 [[${test3}]]</h5>	<!-- null 거짓판정 -->
+	<h5 th:if="${test4}">4 [[${test4}]]</h5>
+	<h5 th:if="${not #strings.isEmpty(test2)}">5 [[${test2}]]</h5>	<!--  null 혹은 empty 문자열 -->
+
+</body>
+</html>

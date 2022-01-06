@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>JS연습:단어첫문자 대문자로</title>
+</head>
+
+<body>
+    <h3>LetterCapitalize<br />영어 문장을 입력하면<br />각 단어 첫 문자를 대문자로 만들기</h3>
+    영어문장입력:<input type="text" id="txt" value="i am a programmer">
+    <br>
+    <input type="button" value="결과" onclick="document.getElementById('result').innerHTML = letterCapitalize(document.getElementById('txt').value)">    <!-- 이런식으로 매개변수(argument) 넘겨줄수 있다-->
+    <h3 id="result"></h3>
+</body>
+
+<script>
+
+     var letterCapitalize = function(text) {
+        text = text.toLowerCase(); // 일단 죄다 소문자로.
+         var arr = text.split(/\s+/); // 공백으로 단어 쪼개기
+
+         var result = ""; // 결과 문장
+         for(var i = 0; i < arr.length; i++){  // 각 단어별로.
+             var first = arr[i].charAt(0); // 첫글자 분리
+             var res = arr[i].slice(1);  // 두번째 글자부터 끝까지
+             first = first.toUpperCase(); // 첫글자만 대문자로
+
+             result += first + res; // 단어 다시 합치기
+
+             // 문장 조립하기
+             if (i < arr.length - 1) {
+                 result += " ";   // 맨 끝이 아니면 공백 추가
+             }
+         }
+
+        return result;
+    }
+
+</script>
+
+</html>
+
+
