@@ -41,48 +41,9 @@ public class IndexController {
 			System.out.println("GET: /login");
 //			return "<h2>/login : login 페이지 </h2>";
 			
-			// 로그인 직전의 url 을 Session 에 기록
-			String referer = request.getHeader("Referer");
-			if(referer != null)
-				request.getSession().setAttribute("url_prior_login", referer);
+
 			
 			return "loginForm";
 		}
 		
-		@PostMapping("/login")
-		public String loginFail() {
-			System.out.println("POST: /login");
-			return "loginForm";
-		}
-		
-		// 현재 로그인한 정보 Authentication 보기
-		@RequestMapping("/auth")
-		@ResponseBody
-		public Authentication auth(HttpSession session) {
-			return SecurityContextHolder.getContext().getAuthentication();
-		}
-		
-		@GetMapping("/join")
-		public String join() {
-			return "joinForm";
-		}
-		
-		@PostMapping("/joinOk")
-		public String joinOk(UserDTO user) {
-			System.out.println("/joinOk: " + user);
-			
-			// password 는 암호화 하여 저장
-			String rawPassword = user.getPw();
-			String encPassword = passwordEncoder.encode(rawPassword);
-			user.setPw(encPassword);
-			
-			int cnt = userService.addMember(user);
-			
-			return "redirect:/login";
-		}
-		
-		@RequestMapping("/accessError")
-		public void accessError() {
-			
-		}
 }
