@@ -1,7 +1,6 @@
 package com.lec.spring.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,10 +39,24 @@ public class IndexController {
 		public String login(HttpServletRequest request) {
 			System.out.println("GET: /login");
 //			return "<h2>/login : login 페이지 </h2>";
-			
-
-			
 			return "loginForm";
 		}
 		
+		
+		// 현재 로그인한 정보 Authentication 보기
+		@RequestMapping("/auth")
+		@ResponseBody
+		public Authentication auth(){
+			return SecurityContextHolder.getContext().getAuthentication();
+		}
+		
+		@GetMapping("/join")
+		public String join() {
+			return "join";
+		}
+		
+		@PostMapping("/joinOk")
+		public String joinOk(UserDTO user) {
+			return "redirect:/login";
+		}
 }
