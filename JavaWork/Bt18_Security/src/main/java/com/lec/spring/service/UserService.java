@@ -11,7 +11,7 @@ import com.lec.spring.domain.UserDTO;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	UserDAO dao;
 	
@@ -27,19 +27,40 @@ public class UserService {
 	// 회원삭제
 	@Transactional
 	public int deleteMember(UserDTO user) {
-		dao.deleteAuths(user.getId());	//	권한들 먼저 삭제
-		int cnt = dao.deleteUser(user);	//	회원 삭제
+		dao.deleteAuths(user.getId()); // 권한들 먼저 삭제
+		int cnt = dao.deleteUser(user); // 회원 삭제
 		return cnt;
 	}
 	
-	// 특정 id(username)의 정보 가져오기
+	// 특정 id(username) 의 정보 가져오기
 	public UserDTO findById(String id) {
 		return dao.findById(id);
 	}
 	
-	
-	// 특정 id의 원한(들) 정보 가져오기
-	public List<String> selectAuthorityById(String id){
+	// 특정 id의 권한(들) 정보 가져오기
+	public List<String> selectAuthoritiesById(String id){
 		return dao.selectAuthorityById(id);
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

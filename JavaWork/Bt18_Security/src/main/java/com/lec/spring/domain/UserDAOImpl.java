@@ -6,19 +6,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
 public class UserDAOImpl implements UserDAO {
 
-    private UserDAO mapper;
-    
-    @Autowired
-    public UserDAOImpl(SqlSession sqlSession) {
-        System.out.println("UserDAOImpl() 생성");
-        mapper = sqlSession.getMapper(UserDAO.class);
-    }
-    
-    
+	private UserDAO mapper;
+	
+	@Autowired
+	public UserDAOImpl(SqlSession sqlSession) {
+		mapper = sqlSession.getMapper(UserDAO.class);
+	}
+	
+	   
     @Override
     public int addUser(UserDTO user) {
         return mapper.addUser(user);
@@ -28,6 +26,7 @@ public class UserDAOImpl implements UserDAO {
     public int addAuth(String id, String auth) {
         return mapper.addAuth(id, auth);
     }
+
 
     @Override
     public int deleteUser(UserDTO user) {
@@ -49,9 +48,23 @@ public class UserDAOImpl implements UserDAO {
         return mapper.findById(id);
     }
 
-    @Override
-    public List<String> selectAuthorityById(String id) {
-        return mapper.selectAuthorityById(id);
-    }
+
+	@Override
+	public List<String> selectAuthorityById(String id) {
+		return mapper.selectAuthorityById(id);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,48 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.domain.UserDAO">
 
-    <insert id="addUser" parameterType="com.lec.spring.domain.UserDTO">
-        INSERT INTO test_member(mb_id, mb_pw, mb_email)
-        VALUES(#{id}, #{pw}, #{email})
-    </insert>
-    
-    <insert id="addAuth">
-        INSERT INTO test_authority
-        VALUES(#{param1}, #{param2})
-    </insert>
+	<insert id="addUser" parameterType="com.lec.spring.domain.UserDTO">
+		INSERT INTO test_member(mb_id, mb_pw, mb_email)
+		VALUES(#{id}, #{pw}, #{email});
+	</insert>
 
-    <delete id="deleteUser" parameterType="com.lec.spring.domain.UserDTO">
-        DELETE FROM test_member
-        WHERE mb_id = #{id}
-    </delete>   
-    
-    <delete id="deleteAuth">
-        DELETE FROM test_authority
-        WHERE mb_id = #{param1} AND mb_auth = #{param2}
-    </delete>
+	<insert id="addAuth">
+		INSERT INTO test_authority
+		VALUES(#{param1}, #{param2});
+	</insert>
+	
+	<delete id="deleteUser" parameterType="com.lec.spring.domain.UserDTO">
+		DELETE FROM test_member
+		WHERE mb_id = #{id}
+	</delete>
+	
+	<delete id="deleteAuth">
+		DELETE FROM test_authority
+		WHERE mb_id = #{param1} AND mb_auth = #{param2}
+	</delete>
+	
+	<delete id="deleteAuths">
+		DELETE FROM test_authority
+		WHERE mb_id = #{param1}
+	</delete>
+	
+	<select id="findById" resultType="com.lec.spring.domain.UserDTO">
+		SELECT
+			mb_uid uid,
+			mb_id id,
+			mb_pw pw,
+			mb_email email,
+			mb_enabled enabled,
+			mb_regdate regdate
+		FROM test_member
+		WHERE mb_id = #{id}
+	</select>
+	
+	<select id="selectAuthorityById" resultType="String">
+		SELECT mb_auth
+		FROM test_authority
+		WHERE mb_id = #{id}
+	</select>
+	
 
-    <delete id="deleteAuths">
-        DELETE FROM test_authority
-        WHERE mb_id = #{param1}
-    </delete>
-
-
-    <select id="findById" resultType="com.lec.spring.domain.UserDTO">
-        SELECT
-            mb_uid uid,
-            mb_id id,
-            mb_pw pw,
-            mb_email email,
-            mb_enabled enabled,
-            mb_regdate regdate
-        FROM test_member
-        WHERE mb_id = #{id} 
-    </select>
-
-    <select id="selectAuthorityById" resultType="String">
-        SELECT mb_auth
-        FROM test_authority
-        WHERE mb_id = #{id}
-    </select>
-    
 </mapper>

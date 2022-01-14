@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
- 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <title>NavBar</title>
@@ -20,7 +20,7 @@
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          <!-- 로그인 안했을 때만 보이는 메뉴 -->
+          <!-- 로그인 안했을때만 보이는 메뉴 -->
           <li class="nav-item" sec:authorize="isAnonymous()">
             <a class="nav-link" href="javascript:void(0)">Anonymous</a>
           </li>
@@ -29,7 +29,7 @@
             <a class="nav-link" href="javascript:void(0)">Authenticated</a>
           </li>
           <!-- 로그인한 사람중 ROLE_MEMBER, ROLE_ADMIN 권한 있는 사람에게만 보이는 메뉴 -->
-          <li class="nav-item" sec:authorize="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')">
+          <li class="nav-item" sec:authorize="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
             <a class="nav-link" href="javascript:void(0)">Member</a>
           </li>
           <!-- 로그인한 사람중 ROLE_ADMIN 권한 있는 사람에게만 보이는 메뉴 -->
@@ -48,7 +48,7 @@
 
         <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
         <form action="/logout" method="POST" sec:authorize="isAuthenticated()">
-          <!-- 로그아웃 후 다시 돌아오기 -->
+          <!--로그아웃후 다시 돌아오기 -->
           <input type="hidden" name="ret_url" value="/nav">
           <span class="d-flex">
             <span class="text-light p-2"><span sec:authentication="name"></span> 님 환영합니다</span>
@@ -73,16 +73,36 @@
       	<hr>
       <p>Username : <span sec:authentication="principal.username"></span></p>
       <p>Password : <span sec:authentication="principal.password"></span></p>
-      <p>email : <span sec:authentication="principal.user.email"></span>
-      	<hr>
+      <p>email : <span sec:authentication="principal.user.email"></span></p>
+		<hr>
       <p>Username : <span th:text="${#authentication.getPrincipal().getUsername()}"></span></p>
       <p>Password : <span th:text="${#authentication.getPrincipal().getPassword()}"></span></p>
       <p>email : <span th:text="${#authentication.getPrincipal().getUser().getEmail()}"></span></p>
-      
-      
+
+	
+
     </div>
   </div>
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-17db0048eb7-1e2511e205f0dda6": {
+		"mysql8-17d9f18a16a-463a6aab465e513e": {
 			"provider": "mysql",
 			"driver": "mysql8",
 			"name": "mydb811",
@@ -12,13 +12,12 @@
 				"port": "3306",
 				"database": "mydb811",
 				"url": "jdbc:mysql://localhost:3306/mydb811",
-				"home": "/usr/local/Cellar/mysql/8.0.27",
+				"home": "C:\\Program Files\\MySQL\\MySQL Server 8.0",
 				"type": "dev",
 				"properties": {
 					"connectTimeout": "20000",
 					"rewriteBatchedStatements": "true",
-					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
-					"allowPublicKeyRetrieval": "TRUE"
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2"
 				},
 				"auth-model": "native"
 			}

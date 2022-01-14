@@ -12,15 +12,36 @@ public interface UserDAO {
 	// 사용자 삭제
 	int deleteUser(UserDTO user);
 	
-	// 특정 id(username) 사용자 의  특정 권한 삭제
+	// 특정 id(username) 사용자 의 특정 권한 삭제
 	int deleteAuth(String id, String auth);
 	
 	// 특정 id(username) 사용자 의 권한(들) 전부 삭제
 	int deleteAuths(String id);
 	
-	// 특정 사용자 id(username) 조회
+	// 특정 id(username) 사용자 조회
 	UserDTO findById(String id);
 	
-	// 특정 사용자 id(username) 의 권한(들) 뽑기
+	// 특정 id(username) 사용자 의 권한(들) 뽑기
 	List<String> selectAuthorityById(String id);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
